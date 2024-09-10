@@ -85,7 +85,7 @@ const App: React.FC = () => {
   ): boolean => {
     // Check if the partition is a leaf
     if (!config.split) {
-      // If there is no parent (i.e., root partition) and it’s a single partition, don’t show remove button
+      // If there is no parent (root partition) and it’s a single partition, don’t show remove button
       if (parentId === null && config.children.length === 0) {
         return false;
       }
@@ -104,7 +104,7 @@ const App: React.FC = () => {
     return true;
   };
 
-  // Helper function to find a parent partition
+  // find a parent partition
   const findParent = (
     config: PartitionConfig,
     targetId: string

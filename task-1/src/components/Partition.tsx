@@ -4,7 +4,7 @@ interface PartitionProps {
   onVerticalSplit: () => void;
   onHorizontalSplit: () => void;
   onRemove: () => void;
-  showRemove: boolean; // New prop
+  showRemove: boolean;
 }
 
 const Partition: FC<PartitionProps> = ({
@@ -27,7 +27,7 @@ const Partition: FC<PartitionProps> = ({
       >
         H
       </button>
-      {showRemove && ( // Conditionally render the remove button
+      {showRemove && (
         <button
           className="border-none outline-none rounded bg-red-500 text-white py-1 px-4 text-[12px]"
           onClick={onRemove}
