@@ -19,4 +19,4 @@ Implement the following functionality:
 5. Be able to remove any partition
 6. Be able to resize the partitions
 
-- [Live link](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
+- [Live link](https://recursive-partitioning-task.netlify.app/)

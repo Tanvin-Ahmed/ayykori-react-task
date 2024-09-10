@@ -22,4 +22,4 @@ Example Output:
 - After clicking "A","B","C","F","F","F","G": outputString displays "ABC_G".
 - After clicking "A" six times followed by "B": outputString displays "\_\_B".
 
-* [Live link](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
+* [Live link](https://alphabet-tile-interaction-task.netlify.app/)
