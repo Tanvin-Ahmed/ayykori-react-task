@@ -14,22 +14,24 @@ const Partition: FC<PartitionProps> = ({
   showRemove,
 }) => {
   return (
-    <div className="w-full h-full flex justify-center items-center gap-3 border-[0.5px]">
+    <div
+      className={`w-full h-full flex justify-center items-center gap-3 border-[0.5px] flex-wrap`}
+    >
       <button
-        className="border-none outline-none rounded bg-blue-500 text-white py-1 px-4 text-[12px]"
+        className="border outline-none rounded bg-blue-50 text-black py-1 px-4 text-[12px]"
         onClick={onVerticalSplit}
       >
         V
       </button>
       <button
-        className="border-none outline-none rounded bg-blue-500 text-white py-1 px-4 text-[12px]"
+        className="border-none outline-none rounded bg-blue-50 text-black py-1 px-4 text-[12px]"
         onClick={onHorizontalSplit}
       >
         H
       </button>
       {showRemove && (
         <button
-          className="border-none outline-none rounded bg-red-500 text-white py-1 px-4 text-[12px]"
+          className="border-none outline-none rounded bg-red-50 text-black py-1 px-4 text-[12px]"
           onClick={onRemove}
         >
           -

@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# Alphabet Tile Interaction
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Problem statement
 
-Currently, two official plugins are available:
+Develop a React application that displays a grid of tiles, each representing a letter of the alphabet in uppercase format. Implement the following functionality:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Tile Rendering: Render a tile for each letter of the alphabet (A to Z) within a container or grid layout.
 
-## Expanding the ESLint configuration
+2. Click Interaction: When a tile is clicked, append the corresponding letter to a string displayed in an HTML element with the ID outputString.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. Consecutive Letter Replacement: If three consecutive letters in the outputString
+   are the same, replace them with an underscore (\_). For example, if the user clicks "A","B","C","F","F","F","G" in that order, the outputString should display "ABC_G".
 
-- Configure the top-level `parserOptions` property like this:
+4. Multiple Consecutive Letters: If more than three consecutive letters are the same,
+   replace them with the appropriate number of underscores. For instance, if the user clicks "A" six times followed by "B", the outputString should display "\_\_B".
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+5. Validation: Your solution will be validated by our system, so make sure it meets the specified requirements.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Example Output:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Initial state: outputString is empty.
+- After clicking "A","B","C","F","F","F","G": outputString displays "ABC_G".
+- After clicking "A" six times followed by "B": outputString displays "\_\_B".
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+* [Live link](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)

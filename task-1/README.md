@@ -1,50 +1,22 @@
-# React + TypeScript + Vite
+# Recursive-partitioning
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Problem statement
 
-Currently, two official plugins are available:
+- Create a responsive layout builder where there is an initial partition with a random color and two buttons named 'V' and 'H'.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clicking the 'V' button will split the initial partition vertically, and clicking the 'H' button will split it horizontally. After the split, one of the partitions will retain its old color, and the new partition will have a new random color.
 
-## Expanding the ESLint configuration
+- The new partitions created via splitting should also be further splittable, and if there are multiple partitions, any partition can be removed via a ‘-' button. The partitions should be resizable by clicking and dragging.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Optionally, the partitions could snap to 1/4, 1/2, and 3/4 ratios.
 
-- Configure the top-level `parserOptions` property like this:
+Implement the following functionality:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Start the challenge
+2. Display an initial partition with 'V' and 'H' buttons
+3. Successfully split the initial screen
+4. Successfully split each partition further
+5. Be able to remove any partition
+6. Be able to resize the partitions
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- [Live link](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)

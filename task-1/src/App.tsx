@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import Partition from "./components/Partition";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "./components/Resizeable";
+import { getRandomColor } from "./utils/utils";
 
 interface PartitionConfig {
   id: string;
   split: "horizontal" | "vertical" | null;
   children: PartitionConfig[];
+  bgColor: string;
 }
 
 const App: React.FC = () => {
@@ -17,13 +19,15 @@ const App: React.FC = () => {
     id: "root",
     split: null,
     children: [],
+    bgColor: "#fff",
   });
 
   const addPartition = (id: string, split: "horizontal" | "vertical") => {
-    const createPartition = (id: string): PartitionConfig => ({
+    const createPartition = (id: string, bgColor: string): PartitionConfig => ({
       id,
       split: null,
       children: [],
+      bgColor,
     });
 
     const addSplit = (
@@ -34,9 +38,13 @@ const App: React.FC = () => {
         return {
           ...config,
           split,
-          children: [createPartition(`${id}-1`), createPartition(`${id}-2`)],
+          children: [
+            createPartition(`${id}-1`, config.bgColor),
+            createPartition(`${id}-2`, getRandomColor()),
+          ],
         };
       }
+
       return {
         ...config,
         children: config.children.map((child) => addSplit(child, split)),
@@ -51,46 +59,36 @@ const App: React.FC = () => {
       config: PartitionConfig,
       idToRemove: string
     ): PartitionConfig | null => {
-      // If the current partition is the one to remove, return null to remove it
       if (config.id === idToRemove) {
         return null;
       }
 
-      // If the current partition has children, process each child
       if (config.children.length > 0) {
         const updatedChildren = config.children
           .map((child) => removeFromConfig(child, idToRemove))
           .filter((child) => child !== null) as PartitionConfig[];
 
-        // If there's only one child after removal, promote it to the parent's level
         if (updatedChildren.length === 1 && config.split) {
           return updatedChildren[0];
         }
 
-        // Return updated config with filtered children
         return { ...config, children: updatedChildren };
       }
 
-      // Return the config if no changes are needed
       return config;
     };
 
     setPartitions((prev) => removeFromConfig(prev, idToRemove) || prev);
   };
 
-  // Function to check if the partition should show the remove button
   const shouldShowRemoveButton = (
     config: PartitionConfig,
     parentId: string | null = null
   ): boolean => {
-    // Check if the partition is a leaf
     if (!config.split) {
-      // If there is no parent (root partition) and it’s a single partition, don’t show remove button
       if (parentId === null && config.children.length === 0) {
         return false;
       }
-
-      // Check if the parent has other siblings
       if (parentId !== null) {
         const parent = findParent(partitions, parentId);
         if (parent) {
@@ -99,12 +97,9 @@ const App: React.FC = () => {
       }
       return true;
     }
-
-    // Not a leaf partition, so we always show the remove button
     return true;
   };
 
-  // find a parent partition
   const findParent = (
     config: PartitionConfig,
     targetId: string
@@ -131,11 +126,11 @@ const App: React.FC = () => {
 
     if (!config.split) {
       return (
-        <>
+        <Fragment key={config.id}>
           <ResizablePanel
             defaultSize={50}
-            key={config.id}
-            className="w-full h-full"
+            className={`w-full h-full`}
+            style={{ backgroundColor: config.bgColor }}
           >
             <Partition
               onVerticalSplit={() => addPartition(config.id, "vertical")}
@@ -145,7 +140,7 @@ const App: React.FC = () => {
             />
           </ResizablePanel>
           <ResizableHandle />
-        </>
+        </Fragment>
       );
     }
 
@@ -156,12 +151,16 @@ const App: React.FC = () => {
         className="w-full h-full"
       >
         {config.children.map((child) => (
-          <>
-            <ResizablePanel defaultSize={50} className="w-full h-full">
+          <Fragment key={child.id}>
+            <ResizablePanel
+              defaultSize={50}
+              className={`w-full h-full`}
+              style={{ backgroundColor: child.bgColor }}
+            >
               {renderPartitionGroup(child, config.id)}
             </ResizablePanel>
             <ResizableHandle />
-          </>
+          </Fragment>
         ))}
       </ResizablePanelGroup>
     );
