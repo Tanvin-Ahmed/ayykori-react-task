@@ -19,7 +19,7 @@ const App: React.FC = () => {
     id: "root",
     split: null,
     children: [],
-    bgColor: "#fff",
+    bgColor: getRandomColor(),
   });
 
   const addPartition = (id: string, split: "horizontal" | "vertical") => {
